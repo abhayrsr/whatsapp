@@ -1,6 +1,7 @@
 import { Dialog, List, Box, ListItem, Typography, styled } from "@mui/material";
 import { qrCodeImage } from "../constants/data";
 import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 
 const Component = styled(Box)`
   display: flex;
@@ -29,8 +30,9 @@ const displayDialog = {
 };
 
 function LoginDialog() {
+
   return (
-    <Dialog open={true} PaperProps={{ sx: displayDialog }}>
+    <Dialog open={true} PaperProps={{ sx: displayDialog }} hideBackdrop={{ sx: { display: 'none' } }}>
       <Component>
         <ComponentStyle>
           <Title>Use WhatsApp on your computer</Title>
@@ -48,8 +50,9 @@ function LoginDialog() {
         <Box>
           <Qrcode src={qrCodeImage} alt="qr code" />
           <GoogleLogin
-            onSuccess={(credentialResponse) => {
-              console.log(credentialResponse);
+            onSuccess={(res) => {
+              const decoded = jwtDecode(res.credential);
+              console.log(decoded);
             }}
             onError={() => {
               console.log("Login Failed");
