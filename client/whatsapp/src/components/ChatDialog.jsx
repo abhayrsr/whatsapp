@@ -1,6 +1,6 @@
 import React from 'react';
 import { AppBar, Dialog, Box, styled } from "@mui/material";
-import Chat from './Chat';
+import EmptyChat from './EmptyChat';
 import Menu from './Menu';
 
 const Component = styled(Box)`
@@ -43,7 +43,7 @@ export default function ChatDialog() {
             <Menu/>
           </LeftComponent>
           <RightComponent>
-            <Chat/>
+            <EmptyChat/>
           </RightComponent>
         </Component>
       </Dialog>
